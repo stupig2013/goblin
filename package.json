@@ -1,0 +1,27 @@
+{
+  "name": "goblin",
+  "version": "1.0.0",
+  "description": "some stupid kits for web",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "stupig",
+  "license": "ISC",
+  "devDependencies": {
+    "bower": "^1.7.9",
+    "browserify": "^13.0.0",
+    "coffee-script": "^1.10.0",
+    "coffeeify": "^2.0.1",
+    "colors": "^1.1.2",
+    "gulp": "^3.9.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^1.5.3",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0"
+  },
+  "browser": {
+    "underscore": "./bower_components/underscore/underscore.js",
+    "color": "./bower_components/colors/underscore.js"
+  }
+}

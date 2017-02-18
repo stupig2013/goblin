@@ -1,0 +1,21 @@
+{
+  "name": "goblin",
+  "description": "some stupid kits for web",
+  "main": "index.js",
+  "authors": [
+    "stupig"
+  ],
+  "license": "ISC",
+  "moduleType": [],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "underscore": "*"
+  }
+}
