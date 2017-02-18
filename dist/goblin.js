@@ -121,7 +121,7 @@ goblin = {
   Finder: Finder
 };
 
-if (typeof module === 'object' && module.filename) {
+if (typeof module === 'object' && typeof module.exports === 'object' && module.filename) {
   module.exports = goblin;
 } else if (typeof define === 'function' && define.amd) {
   define(function() {
