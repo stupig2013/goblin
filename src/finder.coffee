@@ -16,6 +16,7 @@ class Finder
             @keyword = keyword
             o = @o
             root = []
+            @result = []
 
         if o instanceof Array
             for value, index in o
@@ -23,7 +24,7 @@ class Finder
                 switch Object.prototype.toString.call(value)
                     when '[object String]', '[object Number]'
                         if (value + '').indexOf(keyword) > -1
-                            @log """#{@format(_root)}: #{value}"""
+                            @log "#{@format(_root)}: #{value}"
 
                     when '[object Array]', '[object Object]'
                         if @l.indexOf(value) > -1
@@ -59,21 +60,24 @@ class Finder
             if typeof item == 'string'
                 _root += """#{item}."""
             else if typeof item == 'number'
-                _root.replace /\.?$/, """[#{item}]."""
+                _root.replace /\.?$/, "[#{item}]."
         _root = _root.replace /\.?$/, ''
         return _root
 
     log: (str) ->
         if !str then return
-        color = '#00a0e9'
-        c = []
-        pattern = new RegExp("""#{@keyword}""", 'g')
-        _str = str.replace pattern, (match) ->
-            c.push("""color: #{color}""")
-            c.push('color: inherit')
-            return """%c#{match}%c"""
-        c.unshift(_str)
-        console.log.apply(console, c)
+        if typeof navigator == 'object'
+            color = '#00a0e9'
+            c = []
+            pattern = new RegExp("#{@keyword}", 'g')
+            _str = str.replace pattern, (match) ->
+                c.push("color: #{color}")
+                c.push('color: inherit')
+                return "%c#{match}%c"
+            c.unshift(_str)
+            console.log.apply(console, c)
+        else
+            @result.push(str)
 
 
 module.exports = Finder
