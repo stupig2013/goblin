@@ -58,7 +58,7 @@ class Finder
         _root = ''
         for item in root
             if typeof item == 'string'
-                _root += """#{item}."""
+                _root += "#{item}."
             else if typeof item == 'number'
                 _root.replace /\.?$/, "[#{item}]."
         _root = _root.replace /\.?$/, ''

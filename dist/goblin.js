@@ -22,6 +22,7 @@ Finder = (function() {
       this.keyword = keyword;
       o = this.o;
       root = [];
+      this.result = [];
     }
     if (o instanceof Array) {
       for (index = i = 0, len = o.length; i < len; index = ++i) {
@@ -93,16 +94,20 @@ Finder = (function() {
     if (!str) {
       return;
     }
-    color = '#00a0e9';
-    c = [];
-    pattern = new RegExp("" + this.keyword, 'g');
-    _str = str.replace(pattern, function(match) {
-      c.push("color: " + color);
-      c.push('color: inherit');
-      return "%c" + match + "%c";
-    });
-    c.unshift(_str);
-    return console.log.apply(console, c);
+    if (typeof navigator === 'object') {
+      color = '#00a0e9';
+      c = [];
+      pattern = new RegExp("" + this.keyword, 'g');
+      _str = str.replace(pattern, function(match) {
+        c.push("color: " + color);
+        c.push('color: inherit');
+        return "%c" + match + "%c";
+      });
+      c.unshift(_str);
+      return console.log.apply(console, c);
+    } else {
+      return this.result.push(str);
+    }
   };
 
   return Finder;
@@ -121,17 +126,10 @@ goblin = {
   Finder: Finder
 };
 
-if (typeof module === 'object' && typeof module.exports === 'object' && module.filename) {
-  module.exports = goblin;
-} else if (typeof define === 'function' && define.amd) {
-  define(function() {
-    return goblin;
-  });
-} else {
-  window.Goblin = goblin;
-  if (window.G == null) {
-    window.G = goblin;
-  }
+window.Goblin = goblin;
+
+if (window.G == null) {
+  window.G = goblin;
 }
 
 
