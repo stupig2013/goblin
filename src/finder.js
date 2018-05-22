@@ -22,6 +22,7 @@ class Finder {
             path = []
             this.keyword = keyword
             this.result = []
+            cache.push(this)
         }
 
         if (target instanceof Array) {
@@ -37,10 +38,10 @@ class Finder {
                         break
                     case '[object Array]':
                     case '[object Object]':
-                        if (cache.indexOf(item) > -1)
-                            break
-                        cache.push(item)
-                        this.find(keyword, item, currentPath)
+                        if (cache.indexOf(item) === -1) {
+                            cache.push(item)
+                            this.find(keyword, item, currentPath)
+                        }
                 }
             }
         } else {
@@ -59,12 +60,10 @@ class Finder {
                         break
                     case '[object Array]':
                     case '[object Object]':
-                        if (cache.indexOf(item) > -1) {
-                            break
+                        if (cache.indexOf(item) === -1) {
+                            cache.push(item)
+                            this.find(keyword, item, currentPath)
                         }
-
-                        cache.push(item)
-                        this.find(keyword, item, currentPath)
                 }
             }
         }
