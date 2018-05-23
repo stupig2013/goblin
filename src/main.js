@@ -1,4 +1,4 @@
-const Finder = require('./finder')
+import Finder from './finder'
 const Goblin = {
     Finder
 }

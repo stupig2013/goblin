@@ -110,4 +110,4 @@ class Finder {
 
 }
 
-module.exports = Finder
+export default Finder

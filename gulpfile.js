@@ -2,15 +2,18 @@ const gulp = require('gulp')
 const browserify = require('browserify')
 const source = require('vinyl-source-stream')
 const rename = require('gulp-rename')
+const uglify = require('gulp-uglify')
+const buffer = require('vinyl-buffer')
 
 gulp.task('build',  () => {
-    browserify({
-        entries: './src/main.js',
-        extensions: ['.js'],
-        detectGlobals: false
-    })
+    browserify('./src/main.js')
+    .transform('babelify', {presets: ['es2015']})
     .bundle()
     .pipe(source('bundle.js'))
     .pipe(rename('goblin.js'))
+    .pipe(gulp.dest('./lib'))
+    .pipe(buffer())
+    .pipe(uglify())
+    .pipe(rename('goblin.min.js'))
     .pipe(gulp.dest('./lib'))
 })
